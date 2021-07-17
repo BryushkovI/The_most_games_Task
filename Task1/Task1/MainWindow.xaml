@@ -1,0 +1,67 @@
+﻿<Window x:Class="Task1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task1"
+        xmlns:vm="clr-namespace:Task1.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="700" WindowStyle="None">
+    <Window.DataContext>
+        <vm:MainWindowVM/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Left" 
+                   Margin="10,0,0,0"
+                   VerticalAlignment="Center"
+                   Text="Идентификаторы строк:" 
+                   TextWrapping="Wrap"
+                   FontSize="16"
+                   Height="32" Width="180"/>
+            <TextBox Text="{Binding Input_Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                     TextWrapping="Wrap"
+                     Width="350"
+                     Margin="10"
+                     FontSize="16"/>
+            <Button Content="Подсчитать"
+                    Margin="10" 
+                    Width="115"
+                    Command="{Binding GetStringsCommand}"/>
+        </StackPanel>
+        <ListView Grid.Row="1" Margin="10" ItemsSource="{Binding Messages}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Текст" Width="450">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Text}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Количество слов" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Words_count}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Количество гласных" Width="125">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Vowels_count}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+    </Grid>
+</Window>
