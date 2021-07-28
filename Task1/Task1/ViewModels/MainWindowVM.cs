@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,10 @@ namespace Task1.ViewModels
 {
     internal class MainWindowVM : VMBase
     {
+        #region List_vowels
+        public static List<string> vowels;
+        #endregion
+
         #region Input ID
         public string _input_Id;
         public string Input_Id
@@ -51,10 +56,12 @@ namespace Task1.ViewModels
         public ICommand GetStringsCommand { get; }
         private void OnGetStringsCommandExecuted(object p)
         {
-            Id_list = _input_Id.ParseId();
+            Id_list = _input_Id.ParseId(); // parse all correct id
+            _input_Id = ""; // clear feild
+            OnPropertyChanged("Input_Id");
             foreach(var e in _id_list)
             {
-                Methods.Get(e);
+                Methods.Get(e); // get message for each id
             }
         }
         private bool CanGetStringsCommandExecute(object p)
@@ -66,11 +73,7 @@ namespace Task1.ViewModels
         public MainWindowVM()
         {
             GetStringsCommand = new LambdaCommand(OnGetStringsCommandExecuted, CanGetStringsCommandExecute);
-            /*
-             * метод подсчета количества гласных
-             * сделать список
-             * вывести список
-             */
+            vowels = Methods.Alph(@"alph.txt"); // get all vowels
         }
     }
 }

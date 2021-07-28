@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Task1"
         xmlns:vm="clr-namespace:Task1.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="700" WindowStyle="None">
+        Title="MainWindow" Height="300" Width="700" WindowStyle="None" MinWidth="700" MinHeight="210" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:MainWindowVM/>
     </Window.DataContext>
@@ -39,7 +39,8 @@
                     <GridViewColumn Header="Текст" Width="450">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Text}"/>
+                                <TextBlock Text="{Binding Text}"
+                                           TextWrapping="Wrap"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
